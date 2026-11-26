@@ -32,4 +32,13 @@ class Layer {
     }
 
     void set(int p, float t, float v) { kf[p].put(t, v); }
+
+    // animasi masuk 0.6 detik mulai dari t: 0=fade, 1=geser dari kiri, 2=pop
+    void preset(int k, float t) {
+        float t2 = t + 0.6f;
+        float x = get(0, t2), s = get(2, t2), a = get(4, t2);
+        if (k == 0) { set(4, t, 0f); set(4, t2, a); }
+        else if (k == 1) { set(0, t, x - 400); set(0, t2, x); }
+        else { set(2, t, 0f); set(2, t + 0.4f, s * 1.2f); set(2, t2, s); }
+    }
 }

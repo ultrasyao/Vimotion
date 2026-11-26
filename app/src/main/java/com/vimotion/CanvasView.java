@@ -11,6 +11,7 @@ class CanvasView extends View {
     final ArrayList<Layer> layers = new ArrayList<>();
     Layer sel;
     float t; // detik
+    Runnable changed; // dipanggil setelah sentuhan (untuk update timeline)
     final Paint p = new Paint(Paint.ANTI_ALIAS_FLAG), o = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     CanvasView(Context c) {
@@ -55,6 +56,7 @@ class CanvasView extends View {
             sel.set(1, t, y);
         }
         invalidate();
+        if (changed != null) changed.run();
         return true;
     }
 }
